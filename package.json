@@ -1,0 +1,11 @@
+{
+  "name": "com.oneir0mancer.editor-helpers",
+  "version": "0.1.0",
+  "displayName": "Editor Helpers",
+  "description": "Helpful attributes and editor extensions",
+  "unity": "2021.3",
+  "author": {
+    "name": "oneir0mancer",
+    "email": "oneir0mancer.games@gmail.com"
+  }
+}
