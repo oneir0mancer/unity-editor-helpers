@@ -29,6 +29,7 @@ namespace Oneiromancer.EditorHelpers.Attributes
                 {
                     rect.y += 10f;
                     var type = EditorHelper.GetTypeOfProperty(property);
+                    Debug.Log(type);
                     SearchWindow.Open(
                         new SearchWindowContext(GUIUtility.GUIToScreenPoint(rect.center), rect.width),
                         new TypeSearchProvider(type, (t) => SetNestedObject(property, t)));

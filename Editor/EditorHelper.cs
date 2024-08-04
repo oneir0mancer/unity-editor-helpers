@@ -1,7 +1,9 @@
 ﻿//Adapted from: https://github.com/lordofduct/spacepuppy-unity-framework/blob/master/SpacepuppyBaseEditor/EditorHelper.cs
 using System;
+using System.Linq;
 using System.Reflection;
 using UnityEditor;
+using UnityEngine;
 using Object = System.Object;
 
 namespace Oneiromancer.EditorHelpers
@@ -102,7 +104,13 @@ namespace Oneiromancer.EditorHelpers
         private static Type GetFieldType(Type source, string name, int index)
         {
             var enumerable = GetFieldType(source, name);
-            return enumerable.GetElementType();
+
+            if (enumerable.IsGenericType)    //type is List<T>
+            {
+                return enumerable.GetGenericArguments().Single();
+            }
+            
+            return enumerable.GetElementType();    //type is array T[]
         }
     }
 }

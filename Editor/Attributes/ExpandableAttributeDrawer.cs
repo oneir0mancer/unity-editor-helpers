@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace  Oneiromancer.EditorHelpers.Attributes
+namespace Oneiromancer.EditorHelpers.Attributes
 {
+    //TODO add another attribute for pure classes, and add param to check if parent has this attribute
     [CustomPropertyDrawer(typeof(ExpandableAttribute), true)]
     public class ExpandableAttributeDrawer : PropertyDrawer
     {
@@ -24,6 +25,8 @@ namespace  Oneiromancer.EditorHelpers.Attributes
         {
             float totalHeight = EditorGUIUtility.singleLineHeight;
 
+            if (!typeof(UnityEngine.Object).IsAssignableFrom(EditorHelper.GetTypeOfProperty(property))) return totalHeight;    //HACK
+            
             if (property.objectReferenceValue == null) return totalHeight;
             if (!property.isExpanded) return totalHeight;
  
@@ -53,6 +56,10 @@ namespace  Oneiromancer.EditorHelpers.Attributes
             Rect fieldRect = new Rect(position) { height = EditorGUIUtility.singleLineHeight };
 
             EditorGUI.PropertyField(fieldRect, property, label, true);
+            
+            if (!typeof(UnityEngine.Object).IsAssignableFrom(EditorHelper.GetTypeOfProperty(property)))
+                return;    //HACK
+            
             if (property.objectReferenceValue == null) return;
      
             property.isExpanded = EditorGUI.Foldout(fieldRect, property.isExpanded, GUIContent.none, true);

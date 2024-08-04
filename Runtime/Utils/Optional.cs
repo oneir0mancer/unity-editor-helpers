@@ -2,6 +2,7 @@
 
 namespace Oneiromancer.EditorHelpers.Utils
 {
+    /// A struct wrapper that allows to set if inner reference is used or not, instead of checking for null.
     [System.Serializable]
     public struct Optional<T>
     {
